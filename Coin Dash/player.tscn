@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcdnyqph8jsw"]
+[gd_scene load_steps=16 format=3 uid="uid://dcdnyqph8jsw"]
 
 [ext_resource type="Texture2D" uid="uid://bo2nriof5rbps" path="res://assets/player/hurt/player-hurt-1.png" id="1_6k5ti"]
+[ext_resource type="Script" path="res://player.gd" id="1_kkj6c"]
 [ext_resource type="Texture2D" uid="uid://c0eeog41pflqk" path="res://assets/player/hurt/player-hurt-2.png" id="2_e73jr"]
 [ext_resource type="Texture2D" uid="uid://c84mee5uru8om" path="res://assets/player/idle/player-idle-1.png" id="3_yj2ej"]
 [ext_resource type="Texture2D" uid="uid://k80btxwedo8h" path="res://assets/player/idle/player-idle-2.png" id="4_o16va"]
@@ -24,7 +25,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hurt",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -39,9 +40,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_k4eu7")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -71,16 +72,19 @@ animations = [{
 size = Vector2(28, 42)
 
 [node name="Player" type="Area2D"]
+script = ExtResource("1_kkj6c")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_yb8n5")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
+frame_progress = 0.95438
 offset = Vector2(2.08165e-12, -5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_vgn5f")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

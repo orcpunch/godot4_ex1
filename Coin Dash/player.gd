@@ -31,7 +31,6 @@ func start():
 	set_process(true)
 	position = screensize / 2
 	$AnimatedSprite2D.animation = "idle"
-	
 
 func die():
 	$AnimatedSprite2D.animation = "hurt"

@@ -1,14 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bn8wtaoccdwuc"]
+[gd_scene load_steps=11 format=3 uid="uid://bn8wtaoccdwuc"]
 
 [ext_resource type="Texture2D" uid="uid://dsfsndmpl8mb6" path="res://assets/grass.png" id="1_3r200"]
 [ext_resource type="PackedScene" uid="uid://dcdnyqph8jsw" path="res://player.tscn" id="1_21fpb"]
 [ext_resource type="Script" path="res://main.gd" id="1_qpny1"]
 [ext_resource type="PackedScene" uid="uid://8iivanhsl2pv" path="res://coin.tscn" id="2_p1ipx"]
+[ext_resource type="PackedScene" uid="uid://depkrdeaa2b6e" path="res://powerup.tscn" id="3_mejr0"]
 [ext_resource type="PackedScene" uid="uid://gw3j0owlp1x2" path="res://hud.tscn" id="5_iydhs"]
+[ext_resource type="AudioStream" uid="uid://buyhe6aqv5sfu" path="res://assets/audio/Coin.wav" id="6_ubvth"]
+[ext_resource type="AudioStream" uid="uid://c6iwr0456udbd" path="res://assets/audio/Level.wav" id="7_mirjq"]
+[ext_resource type="AudioStream" uid="uid://1hcmvfn5xh22" path="res://assets/audio/EndSound.wav" id="8_w4gr2"]
+[ext_resource type="AudioStream" uid="uid://pgnidrnkncn8" path="res://assets/audio/Powerup.wav" id="9_7dufa"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_qpny1")
 coin_scene = ExtResource("2_p1ipx")
+powerup_scene = ExtResource("3_mejr0")
 
 [node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -25,7 +31,23 @@ stretch_mode = 1
 
 [node name="GameTimer" type="Timer" parent="."]
 
+[node name="PowerupTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ubvth")
+
+[node name="LevelSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_mirjq")
+
+[node name="EndSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_w4gr2")
+
+[node name="PowerupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_7dufa")
+
 [connection signal="hurt" from="Player" to="." method="_on_player_hurt"]
 [connection signal="pickup" from="Player" to="." method="_on_player_pickup"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]

@@ -4,7 +4,8 @@ var screensize = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Timer.start(randf_range(3, 8))
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -18,6 +19,5 @@ func pickup():
 	await tw.finished
 	queue_free()
 
-func _on_timer_timeout():
-	$AnimatedSprite2D.frame = 0
-	$AnimatedSprite2D.play()
+func _on_lifetime_timeout():
+	queue_free()
